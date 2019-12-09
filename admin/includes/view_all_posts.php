@@ -43,15 +43,6 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
   
 }
 ?>
-    <td>10</td>
-    <td>Krisztian Holub</td>
-    <td>Boostrap framework</td>
-    <td>Boostrap</td>
-    <td>Status</td>
-    <td>Image</td>
-    <td>Tags</td>
-    <td>Comments</td>
-    <td>Date</td>
   </tbody>
 </table>
 
