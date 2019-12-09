@@ -23,17 +23,9 @@ if (isset($_GET['source'])) {
 } else {
   $source = '';
 }
-  while ($source) {
-    case '':
-      echo ;
-      break;
-
-    case '':
-      echo ;
-      break;
-
-    case '':
-      echo ;
+  switch ($source) {
+    case 'add_post';
+    include 'includes/add_post.php';
       break;
     
     default: 
