@@ -12,7 +12,7 @@
     <!-- Blog Entries Column -->
     <div class="col-md-8">
 
-<?php
+      <?php
   if (isset($_GET['p_id'])) {
     $the_post_id = $_GET['p_id'];
   }
@@ -54,9 +54,17 @@
     ?>
 
       <!-- Blog Comments -->
-<?php 
+      <?php 
 if(isset($_POST['create_comment'])) {
-  echo $_POST['comment_author'];
+  $the_post_id = $_GET['p_id'];
+  
+  $comment_author = $_POST['comment_author'];
+  $comment_email = $_POST['comment_email'];
+  $comment_content = $_POST['comment_content'];
+
+  $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date)";
+
+  $query .= "VALUES ($the_post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now()";
 }
 ?>
 
@@ -69,7 +77,7 @@ if(isset($_POST['create_comment'])) {
             <input class="form-control" type="text" name="comment_author">
           </div>
           <div class="form-group">
-          <label for="comment_email">Email</label>
+            <label for="comment_email">Email</label>
             <input class="form-control" type="email" name="comment_email">
           </div>
           <div class="form-group">
