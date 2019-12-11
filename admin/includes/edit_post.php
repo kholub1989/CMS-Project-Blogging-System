@@ -99,7 +99,7 @@ if(isset($_POST['update_post'])) {
   <div class="form-group">
     <label for="post_image">Post Image</label>
     <br>
-    <img width="100" src="../images/<?php echo $post_image; ?>" alt="">
+    <img width="100" src="../images/<?php echo $post_image; ?>" alt="post logo">
     <input type="file" name="image">
   </div>
 
@@ -111,8 +111,7 @@ if(isset($_POST['update_post'])) {
 
   <div class="form-group">
     <label for="post_content">Post Content</label>
-    <textarea class="form-control" name="post_content" id="" cols="30" rows="10">
-    <?php echo $post_content; ?>
+    <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $post_content; ?>
     </textarea>
   </div>
 
