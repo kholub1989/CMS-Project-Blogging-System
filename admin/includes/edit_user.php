@@ -34,13 +34,17 @@ if(isset($_POST['edit_user'])) {
 
   // move_uploaded_file($post_image_temp, "../images/$post_image" );
 
-  $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
+  $query = "UPDATE users SET ";
+  $query .= "user_firstname = '{$user_firstname}', "; 
+  $query .= "user_lastname = '{$user_lastname}', ";
+  $query .= "user_role = '{$user_role}', ";
+  $query .= "username = '{$username}', ";
+  $query .= "user_email = '{$user_email}', ";
+  $query .= "user_password = '{$user_password}' ";
+  $query .= "WHERE user_id = '{$the_user_id}' ";
 
-  $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}','{$user_password}' )";
-
- $create_user_query = mysqli_query($connection, $query);
-
- confirmQuery($create_user_query);
+  $edit_user_query = mysqli_query($connection, $query);
+  confirmQuery($edit_user_query);
 }
 ?>
 <!-- ,'$post_image_temp' -->
@@ -64,7 +68,7 @@ if(isset($_POST['edit_user'])) {
 if($user_role == 'admin') {
   echo "<option value='subscriber'>subscriber</option>";
 } else {
-  echo "<option value='admin'>sdmin</option>";
+  echo "<option value='admin'>admin</option>";
 }
 ?>
     </select>
