@@ -3,10 +3,8 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 <?php 
-  if (isset($_SESSION['user_role'])) {
-    if($_SESSION['user_role'] !== 'admin') {
+  if (!isset($_SESSION['user_role'])) {
       header('Location: ../index.php');
-    }
   }
 ?>
 
