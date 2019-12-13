@@ -133,6 +133,20 @@
       </div>
       <!-- /.row -->
 
+<?php 
+  $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+  $select_all_draft_post = mysqli_query($connection, $query);
+  $post_draft_counts = mysqli_num_rows($select_all_draft_post);
+
+  $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
+  $unapproved_comments_query = mysqli_query($connection, $query);
+  $unapproved_comments_count = mysqli_num_rows($unapproved_comments_query);
+
+  $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+  $select_all_subscribers = mysqli_query($connection, $query);
+  $subscribers_counts = mysqli_num_rows($select_all_subscribers);
+?>
+
       <div class="row">
 <script type="text/javascript">
   google.charts.load('current', {'packages':['bar']});
@@ -140,17 +154,22 @@
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-    ['Year', 'Sales', 'Expenses', 'Profit'],
-    ['2014', 1000, 400, 200],
-    ['2015', 1170, 460, 250],
-    ['2016', 660, 1120, 300],
-    ['2017', 1030, 540, 350]
+    ['Data', 'Count'],
+<?php 
+  $elements_text = ['Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+  $elements_count = [$post_counts, $post_draft_counts, $comment_counts, $unapproved_comments_count, $user_counts, $subscribers_counts, $categorie_counts];
+
+  for ($i=0; $i < 7; $i++) { 
+    echo "['{$elements_text[$i]}'" . "," . "{$elements_count[$i]}],";
+  }
+?>
+
   ]);
 
   var options = {
     chart: {
-    title: 'Company Performance',
-    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+    title: '',
+    subtitle: '',
     }
   };
 
@@ -159,7 +178,7 @@
   chart.draw(data, google.charts.Bar.convertOptions(options));
   }
 </script>
-        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
       </div>
 
     </div>
