@@ -86,11 +86,15 @@
   <!-- /.row -->
 
   <hr>
-
-  <ul class="pager">
+  
+  <ul class="pagination">
 <?php 
   for ($i=1; $i <= $count; $i++) { 
-    echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+    if ($i == $page) {
+      echo "<li class='page-item active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+    } else {
+      echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
+    }
   }
 ?>
   
