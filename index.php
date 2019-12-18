@@ -13,7 +13,11 @@
     <div class="col-md-8">
 
     <?php
-    $query = "SELECT * FROM posts ";
+    $post_query_count = "SELECT * FROM posts";
+    $find_count = mysqli_query($connection, $post_query_count);
+    $count = mysqli_num_rows($find_count);
+
+    $query = "SELECT * FROM posts";
     $select_all_posts = mysqli_query($connection, $query);
 
       while ($row = mysqli_fetch_assoc($select_all_posts)) {
