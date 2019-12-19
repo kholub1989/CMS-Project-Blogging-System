@@ -26,11 +26,11 @@ $(document).ready(function () {
   })
 })
 
-// document.addEventListener("DOMContentLoaded", function(){
-//     // CKEDITOR
-//   ClassicEditor
-//       .create(document.querySelector('#body'))
-//       .catch(error => {
-//           console.error(error);
-//       });
-// });
+function loadUsersOnline() {
+  $.get("functions.php?onlineusers=reslut", function(date){
+    $(".usersonline").text(date);
+  });
+}
+setInterval(function(){
+  loadUsersOnline();
+},500);
