@@ -34,28 +34,45 @@ if(isset($_POST['edit_user'])) {
 
   // move_uploaded_file($post_image_temp, "../images/$post_image" );
 
-  $query = "SELECT randSalt FROM users";
-  $select_randsalt_query = mysqli_query($connection, $query);
-  if (!$select_randsalt_query) {
-    die("Query Failed" . mysqli_error($connection));
+  // $query = "SELECT randSalt FROM users";
+  // $select_randsalt_query = mysqli_query($connection, $query);
+  // if (!$select_randsalt_query) {
+  //   die("Query Failed" . mysqli_error($connection));
+  
+
+  // $row = mysqli_fetch_array($select_randsalt_query);
+  // $salt = $row['randSalt'];
+  // $hashed_password = crypt($user_password, $salt);
+
+  if(!empty($user_password)) {
+    $query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+    $get_user_query = mysqli_query($connection, $query);
+    confirmQuery(($get_user_query));
+    
+    $row = mysqli_fetch_array($get_user_query);
+    $db_user_password = $row['user_password'];
+  
+    if($db_user_password != $user_password) {
+      $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+    }
+    
+    $query = "UPDATE users SET ";
+    $query .= "user_firstname = '{$user_firstname}', "; 
+    $query .= "user_lastname = '{$user_lastname}', ";
+    $query .= "user_role = '{$user_role}', ";
+    $query .= "username = '{$username}', ";
+    $query .= "user_email = '{$user_email}', ";
+    $query .= "user_password = '{$hashed_password}' ";
+    $query .= "WHERE user_id = '{$the_user_id}' ";
+  
+    $edit_user_query = mysqli_query($connection, $query);
+    confirmQuery($edit_user_query);
+    
+    echo "<div class='alert alert-success' role='alert'>User Updated <a href='users.php'>View Users</a></div>";
   }
-
-  $row = mysqli_fetch_array($select_randsalt_query);
-  $salt = $row['randSalt'];
-  $hashed_password = crypt($user_password, $salt);
-
-  $query = "UPDATE users SET ";
-  $query .= "user_firstname = '{$user_firstname}', "; 
-  $query .= "user_lastname = '{$user_lastname}', ";
-  $query .= "user_role = '{$user_role}', ";
-  $query .= "username = '{$username}', ";
-  $query .= "user_email = '{$user_email}', ";
-  $query .= "user_password = '{$hashed_password}' ";
-  $query .= "WHERE user_id = '{$the_user_id}' ";
-
-  $edit_user_query = mysqli_query($connection, $query);
-  confirmQuery($edit_user_query);
 }
+
+
 ?>
 <!-- ,'$post_image_temp' -->
 
