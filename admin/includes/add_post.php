@@ -37,17 +37,16 @@ if(isset($_POST['create_post'])) {
 
   <div class="form-group">
     <label for="title">Post Title</label>
-    <input type="text" class="form-control" name="title">
+    <input type="text" class="form-control" name="title" id="title">
   </div>
 
   <div class="form-group">
+    <label for="post_category">Category</label>
     <select name="post_category" id="post_category">
     <?php 
       $query = "SELECT * FROM categories";
       $select_categories = mysqli_query($connection, $query);
-
       confirmQuery($select_categories);
-      
       while ($row = mysqli_fetch_assoc($select_categories)) {
         $cat_id = $row['cat_id'];
         $cat_title = $row['cat_title']; 
@@ -57,10 +56,26 @@ if(isset($_POST['create_post'])) {
     </select>
   </div>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="title">Post Author</label>
     <input type="text" class="form-control" name="author">
+  </div> -->
+  <div class="form-group">
+    <label for="users">Users</label>
+    <select name="users" id="users">
+    <?php 
+      $users_query = "SELECT * FROM users";
+      $select_users = mysqli_query($connection, $users_query);
+      confirmQuery($select_users);
+      while ($row = mysqli_fetch_assoc($select_users)) {
+        $user_id = $row['user_id'];
+        $username = $row['username']; 
+        echo "<option value='{$user_id}'>{$username}</option>";
+      }
+    ?>
+    </select>
   </div>
+
 
   <div class="form-group">
     <select name="post_status" id="">
@@ -72,12 +87,12 @@ if(isset($_POST['create_post'])) {
 
   <div class="form-group">
     <label for="post_image">Post Image</label>
-    <input type="file" name="image">
+    <input type="file" name="image" id="post_image">
   </div>
 
   <div class="form-group">
     <label for="post_tags">Post Tags</label>
-    <input type="text" class="form-control" name="post_tags">
+    <input type="text" class="form-control" name="post_tags" id="post_tags">
   </div>
 
   <div class="form-group">
