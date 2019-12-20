@@ -25,7 +25,7 @@
   
     $user_firstname = $_POST['user_firstname'];
     $user_lastname  = $_POST['user_lastname'];
-    $user_role      = $_POST['user_role'];
+    // $user_role      = $_POST['user_role'];
   
     // $post_image = $_FILES['image']['name'];
     // $post_image_temp = $_FILES['image']['tmp_name'];
@@ -80,18 +80,18 @@
               <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname; ?>">
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <select name="user_role" id="">
-                <option value="subscriber"><?php echo $user_role; ?></option>
+                <option value="subscriber"><?php //echo $user_role; ?></option>
 <?php 
-  if($user_role == 'admin') {
-  echo "<option value='subscriber'>subscriber</option>";
-  } else {
-  echo "<option value='admin'>admin</option>";
-  }
+  //if($user_role == 'admin') {
+  //echo "<option value='subscriber'>subscriber</option>";
+  //} else {
+  //echo "<option value='admin'>admin</option>";
+  //}
 ?>
               </select>
-            </div>
+            </div> -->
 
 <!-- <div class="form-group">
 <label for="post_image">Post Image</label>
@@ -110,7 +110,7 @@
 
             <div class="form-group">
               <label for="user_password">Password</label>
-              <input type="password" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
+              <input type="password" class="form-control" name="user_password" autocomplete="off">
             </div>
 
             <div class="form-group">
