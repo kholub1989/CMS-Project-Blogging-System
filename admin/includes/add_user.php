@@ -1,20 +1,20 @@
 <?php 
 if(isset($_POST['create_user'])) {
   
-  $user_firstname = $_POST['user_firstname'];
-  $user_lastname = $_POST['user_lastname'];
-  $user_role = $_POST['user_role'];
+  $user_firstname = escape($_POST['user_firstname']);
+  $user_lastname = escape($_POST['user_lastname']);
+  $user_role = escape($_POST['user_role']);
 
   // $post_image = $_FILES['image']['name'];
   // $post_image_temp = $_FILES['image']['tmp_name'];
 
-  $username = $_POST['username'];
-  $user_email = $_POST['user_email'];
-  $user_password = $_POST['user_password'];
+  $username = escape($_POST['username']);
+  $user_email = escape($_POST['user_email']);
+  $user_password = escape($_POST['user_password']);
   // $post_date = date('d-m-y');
 
   // move_uploaded_file($post_image_temp, "../images/$post_image" );
-  $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+  $user_password = escape(password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10)));
 
   $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
 
