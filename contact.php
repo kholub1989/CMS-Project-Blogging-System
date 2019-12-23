@@ -3,41 +3,12 @@
 
 <?php 
 if(isset($_POST['submit'])) {
-  $username = $_POST['username'];
-  $email    = $_POST['email'];
-  $password = $_POST['password'];
+  $to       = "kholub1989@gmail.com";
+  $subject  = wordwrap($_POST['subject'], 70);
+  $body     = $_POST['body'];
+  $header   = $_POST['email'];
 
-  if(!empty($username) && !empty($email) && !empty($password)) {
-    $username = mysqli_real_escape_string($connection, $username);
-    $email    = mysqli_real_escape_string($connection, $email);
-    $password = mysqli_real_escape_string($connection, $password);
-
-    $password = password_hash( $password, PASSWORD_BCRYPT, array('cost' => 12));
-  
-    // $query = "SELECT randSalt FROM users";
-    // $select_randsalt_query = mysqli_query($connection, $query);
-  
-    // if(!$select_randsalt_query) {
-    //   die("Query Failed" . mysqli_error($connection));
-    // }
-  
-    // $row = mysqli_fetch_array($select_randsalt_query);
-    // $salt = $row['randSalt'];
-    // $password = crypt($password, $salt);
-  
-    $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-    $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' )";
-    $register_user_query = mysqli_query($connection, $query);
-    if (!$register_user_query) {
-      die("Query Failed" . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-    }
-    $message = "Your registration has been submitted";
-  } else {
-    $message = "Fields cannot be empty";
-  }
-
-} else {
-  $message = "";
+  mail($to,$subject,$body, $header);
 }
 ?>
 
@@ -63,7 +34,7 @@ if(isset($_POST['submit'])) {
               </div>
               <div class="form-group">
                 <label for="subject" class="sr-only">Subject</label>
-                <input type="email" name="subject" id="subject" class="form-control" placeholder="Enter your subject">
+                <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter your subject">
               </div>
               <div class="form-group">
                 <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
