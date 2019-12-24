@@ -87,4 +87,28 @@ function delete_categories() {
   }
 }
 
+function recordCount($table) {
+  global $connection;
+  $query = "SELECT * FROM " . $table;
+  $select_all_post = mysqli_query($connection, $query);
+  $result = mysqli_num_rows($select_all_post);
+  confirmQuery($result);
+
+  return $result;
+}
+
+function checkStatus($tabel, $column, $status) {
+  global $connection;
+  $query = "SELECT * FROM $tabel WHERE $column = '$status' ";
+  $result = mysqli_query($connection, $query);
+  return mysqli_num_rows($result);
+}
+
+function checkUserRole($table, $column, $role) {
+  global $connection;
+  $query = "SELECT * FROM $table WHERE $column = '$role'";
+  $select_all_subscribers = mysqli_query($connection, $query);
+  return mysqli_num_rows($select_all_subscribers);
+}
+
 ?>
