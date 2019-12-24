@@ -2,7 +2,7 @@
   include("delete_modal.php");
 
   if(isset($_POST['chackBoxArray'])) {
-    foreach (escape($_POST['chackBoxArray']) as $postValueId) {
+    foreach ($_POST['chackBoxArray'] as $postValueId) {
       $bulk_options = escape($_POST['bulk_options']);
 
       switch ($bulk_options) {
@@ -33,14 +33,15 @@
         $post_category_id = $row['post_category_id'];
         $post_date        = $row['post_date'];
         $post_author      = $row['post_author'];
+        $post_user        = $row['post_user'];
         $post_status      = $row['post_status'];
         $post_image       = $row['post_image'];
         $post_tags        = $row['post_tags'];
         $post_content     = $row['post_content'];
       }
 
-      $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-      $query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
+      $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_user, post_date, post_image, post_content, post_tags, post_status) ";
+      $query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', '{$post_user}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
       $copy_query = mysqli_query($connection, $query);
 
       if (!$copy_query) {
