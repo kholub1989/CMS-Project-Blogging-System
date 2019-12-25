@@ -1,8 +1,9 @@
-<?php  include "includes/db.php"; ?>
-<?php  include "includes/header.php"; ?>
+<?php include "includes/db.php"; ?>
+<?php include "./admin/functions.php"?>
+<?php include "includes/header.php"; ?>
 
 <?php 
-if(isset($_POST['submit'])) {
+if($_SERVER['REQUEST_METHOD'] == "POST") {
   $username = trim($_POST['username']);
   $email    = trim($_POST['email']);
   $password = trim($_POST['password']);
@@ -12,6 +13,7 @@ if(isset($_POST['submit'])) {
     'email'=> '',
     'password'=> ''
   ];
+
   if (strlen($username) < 4) {
     $error['username'] = 'Username needs to be longer';
   }
@@ -33,9 +35,11 @@ if(isset($_POST['submit'])) {
 
   foreach ($error as $key => $value) {
     if (empty($value)) {
-      // register_user($username, $email, $password);
-      // login_user($username, $password);
+      unset($error[$key]);
     }
+  }
+  if (empty($error)) {  
+    register_user($username, $email, $password);
   }
   
 }
@@ -59,8 +63,13 @@ if(isset($_POST['submit'])) {
             <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
               <div class="form-group">
                 <label for="username" class="sr-only">username</label>
-                <input type="text" name="username" id="username" class="form-control"
-                  placeholder="Enter Desired Username" autocapitalize="on" 
+                <input 
+                  type="text" 
+                  name="username" 
+                  id="username" 
+                  class="form-control"
+                  placeholder="Enter Desired Username" 
+                  autocapitalize="on" 
                   value="<?php echo isset($username) ? $username : ''; ?>">
                 <p><?php echo isset($error['username']) ? $error['username'] : ''; ?></p>
               </div>
@@ -82,7 +91,7 @@ if(isset($_POST['submit'])) {
                 <p><?php echo isset($error['password']) ? $error['password'] : ''; ?></p>
               </div>
 
-              <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block"
+              <input type="submit" name="register" id="btn-login" class="btn btn-custom btn-lg btn-block"
                 value="Register">
             </form>
 

@@ -1,8 +1,8 @@
 <?php 
 
-// function redirect($location){
-//   return header("Location:" $location);
-// }
+function redirect($location){
+  return header("Location:" . $location);
+}
 
 function escape($string) {
   global $connection;
@@ -158,14 +158,7 @@ function email_exists($email) {
 
 function register_user($username, $email, $password) {
   global $connection;
-
   
-
-  if (username_exists($username)) {
-    
-  }
-
-  if(!empty($username) && !empty($email) && !empty($password)) {
     $username = mysqli_real_escape_string($connection, $username);
     $email    = mysqli_real_escape_string($connection, $email);
     $password = mysqli_real_escape_string($connection, $password);
@@ -176,10 +169,9 @@ function register_user($username, $email, $password) {
     $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber' )";
     $register_user_query = mysqli_query($connection, $query);
     confirmQuery($register_user_query);
-  }
 }
 
-function login_user($username, $email) {
+function login_user($username, $password) {
   global $connection;
 
   $username = trim($username);
@@ -202,8 +194,6 @@ function login_user($username, $email) {
     $db_user_role       = $row['user_role'];
   }
 
-  // $password = crypt($password, $db_user_password);
-
   if (password_verify($password, $db_user_password)) {
     $_SESSION['username']   = $db_username;
     $_SESSION['firstname']  = $db_user_firstname;
@@ -214,6 +204,5 @@ function login_user($username, $email) {
     header("Location: ../index.php");
   }
 }
-
 
 ?>
