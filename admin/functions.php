@@ -159,9 +159,7 @@ function email_exists($email) {
 function register_user($username, $email, $password) {
   global $connection;
 
-  $username = $_POST['username'];
-  $email    = $_POST['email'];
-  $password = $_POST['password'];
+  
 
   if (username_exists($username)) {
     
