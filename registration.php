@@ -18,13 +18,13 @@ if(isset($_POST['submit'])) {
   if ($username == '') {
     $error['username'] = 'Username cannot be empty';
   }
-  if (username_exists(($username))) {
+  if (username_exists($username)) {
     $error['username'] = 'Username already exists, pick another';
   }
   if ($email == '') {
     $error['email'] = 'Email cannot be empty';
   }
-  if (email_exists(($email))) {
+  if (email_exists($email)) {
     $error['email'] = 'Email already exists, <a href="index.php">Please login</a>';
   }
   if ($password == '') {
@@ -62,15 +62,24 @@ if(isset($_POST['submit'])) {
                 <input type="text" name="username" id="username" class="form-control"
                   placeholder="Enter Desired Username" autocapitalize="on" 
                   value="<?php echo isset($username) ? $username : ''; ?>">
+                <p><?php echo isset($error['username']) ? $error['username'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label for="email" class="sr-only">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com" autocapitalize="on" 
-                  value="<?php echo isset($email) ? $email : ''; ?>>
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  class="form-control" 
+                  placeholder="somebody@example.com" 
+                  value="<?php echo isset($email) ? $email : ''; ?>"
+                  autocapitalize="on">
+                <p><?php echo isset($error['email']) ? $error['email'] : ''; ?></p>
               </div>
               <div class="form-group">
                 <label for="password" class="sr-only">Password</label>
                 <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                <p><?php echo isset($error['password']) ? $error['password'] : ''; ?></p>
               </div>
 
               <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block"
