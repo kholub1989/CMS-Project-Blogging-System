@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
   }
   if (empty($error)) {  
     register_user($username, $email, $password);
+    login_user($username, $password);
   }
   
 }
