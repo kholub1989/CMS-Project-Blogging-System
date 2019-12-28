@@ -1,7 +1,8 @@
 <?php 
 
 function redirect($location){
-  return header("Location:" . $location);
+  header("Location:" . $location);
+  exit;
 }
 
 function escape($string) {
