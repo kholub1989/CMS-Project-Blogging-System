@@ -5,6 +5,27 @@ function redirect($location){
   exit;
 }
 
+function ifItIsMethod($method=null) {
+  if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
+    return true;
+  } else { 
+    return false;
+  }
+}
+
+function isLoggedIn() {
+  if (isset($_SESSION['user_role'])) {
+    return true;
+  }
+  return false;
+}
+
+function checkIfUserisLogegdInAndRedirect($redirectLocation=null) {
+  if (isLoggedIn()) {
+    redirect($redirectLocation);
+  }
+}
+
 function escape($string) {
   global $connection;
   return mysqli_real_escape_string($connection, trim($string));
