@@ -215,17 +215,19 @@ function login_user($username, $password) {
     $db_user_firstname  = $row['user_firstname'];
     $db_user_lastname   = $row['user_lastname'];
     $db_user_role       = $row['user_role'];
+    
+    if (password_verify($password, $db_user_password)) {
+      $_SESSION['username']   = $db_username;
+      $_SESSION['firstname']  = $db_user_firstname;
+      $_SESSION['lastname']   = $db_user_lastname;
+      $_SESSION['user_role']  = $db_user_role;
+      redirect("/cms/admin");
+    } else {
+      return false;
+    }
   }
-
-  if (password_verify($password, $db_user_password)) {
-    $_SESSION['username']   = $db_username;
-    $_SESSION['firstname']  = $db_user_firstname;
-    $_SESSION['lastname']   = $db_user_lastname;
-    $_SESSION['user_role']  = $db_user_role;
-    redirect("/cms/admin");
-  } else {
-    redirect("/cms/index.php");
-  }
+  return true;
 }
+
 
 ?>

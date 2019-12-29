@@ -1,3 +1,4 @@
+<?php include_once "./admin/functions.php"; ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -40,9 +41,18 @@
             echo "<li class='$category_class'><a href='/cms/category/{$cat_id}'>{$cat_title}</a></li>";
           }
         ?>
+<?php if(isLoggedIn()): ?>
         <li>
           <a href="/cms/admin">Admin</a>
         </li>
+        <li>
+        <a href="/cms/includes/logout.php">Logout</a>
+        </li>
+<?php else: ?>
+        <li>
+          <a href="/cms/login.php">Login</a>
+        </li>
+<?php endif; ?>
         <li class="<?php echo $registration_class; ?>">
           <a href="/cms/registration">Registration</a>
         </li>
