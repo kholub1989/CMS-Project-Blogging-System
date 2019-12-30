@@ -9,7 +9,7 @@
         <h4 class="modal-title">Modal Delete Box</h4>
       </div>
       <div class="modal-body">
-        <h3 class="text-center">Are you shure you want to delete this post?</h3>
+        <h3 class="text-center">Are you sure you want to delete this post?</h3>
       </div>
       <div class="modal-footer">
         <a href="" class="btn btn-danger modal_delete_link">Delete</a>
