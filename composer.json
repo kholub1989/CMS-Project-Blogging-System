@@ -1,0 +1,12 @@
+{
+    "name": "krisztianholub/cms",
+    "require": {
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "authors": [
+        {
+            "name": "Krisztian Holub",
+            "email": "kholub1989@gmail.com"
+        }
+    ]
+}
