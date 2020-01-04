@@ -1,6 +1,14 @@
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
 <?php include_once "./admin/functions.php" ?>
+<?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+      require 'vendor/autoload.php';
+      require './classes/Config.php';
+?>
 
 <?php 
 if(!ifItIsMethod('get') && !isset($_GET['forgot'])){
@@ -17,6 +25,33 @@ if(ifItIsMethod('post')){
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
+
+        /* 
+         * CONFIGUR PHPMAILER
+         */
+        $mail = new PHPMailer();
+
+      
+          //Server settings
+          $mail->SMTPDebug  = SMTP::DEBUG_SERVER;                      
+          $mail->isSMTP();
+          $mail->Host       = Config::SMTP_HOST;                    
+          $mail->Port       = Config::SMTP_PORT;
+          $mail->Username   = Config::SMTP_USER;                            $mail->Password   = Config::SMTP_PASSWORD;                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+          $mail->SMTPAuth   = true;                                 
+          
+          //Recipients
+          $mail->setFrom('kholub1989@gmail.com', 'Krisztian Holub');
+          $mail->addAddress($email);
+          $mail->Subject = 'This is a test email';
+          
+          $mail->Body = 'Email body';
+          
+          if ($mail->send()) {
+            echo 'Message has been sent';
+          } else {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
       } else {
         echo mysqli_error($connection);
       }
