@@ -8,7 +8,7 @@
 ?>
 
 <?php 
-if(!ifItIsMethod('get') && !isset($_GET['forgot'])){
+if(!isset($_GET['forgot'])){
   redirect('index');
 }
 
@@ -41,7 +41,9 @@ if(ifItIsMethod('post')){
           $mail->addAddress($email);
           $mail->Subject = 'This is a test email';
           
-          $mail->Body = 'Email body';
+          $mail->Body = '<p>Please click to reset your password
+          <a href="http://localhost:8080/cms/reset.php?email='.$email.'&token='.$token.' ">http://localhost:8080/cms/reset.php?email='.$email.'&token='.$token.' </a>
+          </p>';
           
           if ($mail->send()) {
             echo 'Message has been sent';
