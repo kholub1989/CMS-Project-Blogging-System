@@ -2,12 +2,9 @@
 <?php include "includes/header.php"; ?>
 <?php include_once "./admin/functions.php" ?>
 <?php 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
+      use PHPMailer\PHPMailer\PHPMailer;
+      use PHPMailer\PHPMailer\SMTP;
       require 'vendor/autoload.php';
-      require './classes/Config.php';
 ?>
 
 <?php 
@@ -30,15 +27,14 @@ if(ifItIsMethod('post')){
          * CONFIGUR PHPMAILER
          */
         $mail = new PHPMailer();
-
-      
           //Server settings
           $mail->SMTPDebug  = SMTP::DEBUG_SERVER;                      
           $mail->isSMTP();
           $mail->Host       = Config::SMTP_HOST;                    
           $mail->Port       = Config::SMTP_PORT;
           $mail->Username   = Config::SMTP_USER;                            $mail->Password   = Config::SMTP_PASSWORD;                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-          $mail->SMTPAuth   = true;                                 
+          $mail->SMTPAuth   = true;   
+          $mail->CharSet    = 'UTF-8';                          
           
           //Recipients
           $mail->setFrom('kholub1989@gmail.com', 'Krisztian Holub');
