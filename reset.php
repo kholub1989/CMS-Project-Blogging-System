@@ -5,6 +5,20 @@
   // if(!isset($_GET['email']) && !isset($_GET['token'])) {
   //   redirect('index');
   // }
+  $token = '3b82e5615d303bb8dc7e6ddfef4836400d75da557474a9dbf52b6d3e5117075cdd292d0d096a202da44f808b1298d2304b56';
+
+  if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token From users WHERE token=?')) {
+    mysqli_stmt_bind_param($stmt, 's', $token);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $username, $user_email, $token);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    // if ($GET['token'] !== $token || $_GET['email'] !== $email) {
+    //   redirect('index');
+    // }
+    
+  }
 ?>
 
 <!-- Navigation -->
