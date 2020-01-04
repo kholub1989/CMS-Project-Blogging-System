@@ -27,13 +27,13 @@ if(ifItIsMethod('post')){
          * CONFIGUR PHPMAILER
          */
         $mail = new PHPMailer();
-          //Server settings
-          $mail->SMTPDebug  = SMTP::DEBUG_SERVER;                      
+          //Server settings                    
           $mail->isSMTP();
-          $mail->Host       = Config::SMTP_HOST;                    
+          $mail->Host       = Config::SMTP_HOST;
           $mail->Port       = Config::SMTP_PORT;
-          $mail->Username   = Config::SMTP_USER;                            $mail->Password   = Config::SMTP_PASSWORD;                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-          $mail->SMTPAuth   = true;   
+          $mail->Username   = Config::SMTP_USER;                  $mail->Password   = Config::SMTP_PASSWORD;              $mail->SMTPSecure = 'tls';
+          $mail->SMTPAuth   = true;
+          $mail->isHTML(true);   
           $mail->CharSet    = 'UTF-8';                          
           
           //Recipients
@@ -46,12 +46,12 @@ if(ifItIsMethod('post')){
           </p>';
           
           if ($mail->send()) {
-            echo 'Message has been sent';
+            $emailSent = true;
           } else {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
           }
       } else {
-        echo mysqli_error($connection);
+        // echo mysqli_error($connection);
       }
     }
   }
@@ -70,14 +70,12 @@ if(ifItIsMethod('post')){
           <div class="panel-body">
             <div class="text-center">
 
+<?php if(!isset($emailSent)): ?>
 
               <h3><i class="fa fa-lock fa-4x"></i></h3>
               <h2 class="text-center">Forgot Password?</h2>
               <p>You can reset your password here.</p>
               <div class="panel-body">
-
-
-
 
                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
@@ -96,6 +94,10 @@ if(ifItIsMethod('post')){
                 </form>
 
               </div><!-- Body-->
+              
+<?php else: ?>
+              <h2>Please check your email</h2>
+<?php endif; ?>
 
             </div>
           </div>
