@@ -4,11 +4,14 @@
 <?php require "vendor/autoload.php"; ?>
 
 <?php 
+$dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+$dotenv->load();
+
 $options = array(
   'cluster' => 'us2',
   'encrypted' => true
 );
-$pusher = new Pusher\Pusher('740e828794a3c0164895', '70a16b02c7bb24a05844', '928633', $options);
+$pusher = new Pusher\Pusher(getenv('APP_KEY'), getenv('APP_SCRET'), getenv('APP_ID'), $options);
 
 
 

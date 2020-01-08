@@ -460,3 +460,6 @@ composer.lock
 *.css.map
 *.sass.map
 *.scss.map
+
+# dotenv environment variables file
+.env

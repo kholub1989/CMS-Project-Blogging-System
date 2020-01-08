@@ -2,7 +2,8 @@
     "name": "krisztianholub/cms",
     "require": {
         "phpmailer/phpmailer": "^6.1",
-        "pusher/pusher-php-server": "^4.1"
+        "pusher/pusher-php-server": "^4.1",
+        "vlucas/phpdotenv": "^4.1"
     },
     "autoload": {
         "classmap": [
