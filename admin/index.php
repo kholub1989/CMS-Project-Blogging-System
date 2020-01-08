@@ -166,6 +166,9 @@
 
   <?php include "includes/admin_footer.php" ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script>
@@ -177,6 +180,7 @@
     var notificationChannel = pusher.subscribe('notifications');
     notificationChannel.bind('new_user', function(notification){
       var message = notification.message;
+      toastr.success(`${message} just registered`);
       console.log(message);
     });
   })

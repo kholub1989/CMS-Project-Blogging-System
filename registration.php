@@ -49,7 +49,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
   }
   if (empty($error)) {  
     register_user($username, $email, $password);
-    $pusher->trigger('notifications', 'new_user', $username);
+    $data['message'] = $username;
+    $pusher->trigger('notifications', 'new_user', $data);
     login_user($username, $password);
   }
   
