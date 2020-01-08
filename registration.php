@@ -4,7 +4,11 @@
 <?php require "vendor/autoload.php"; ?>
 
 <?php 
-$pusher = new Pusher\Pusher('740e828794a3c0164895', '70a16b02c7bb24a05844', '928633', 'us2');
+$options = array(
+  'cluster' => 'us2',
+  'encrypted' => true
+);
+$pusher = new Pusher\Pusher('740e828794a3c0164895', '70a16b02c7bb24a05844', '928633', $options);
 
 
 
