@@ -61,7 +61,6 @@
       </h1>
 
       <!-- First Blog Post -->
-      <h1><?php echo $count; ?></h1>
       <h2>
         <a href="post/<?php echo $post_id; ?>"><?php echo $post_title ?></a>
       </h2>

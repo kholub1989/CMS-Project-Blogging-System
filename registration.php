@@ -1,6 +1,7 @@
 <?php include "includes/db.php"; ?>
 <?php include "./admin/functions.php"?>
 <?php include "includes/header.php"; ?>
+<?php require 'vendor/autoload.php'; ?>
 
 <?php 
 if($_SERVER['REQUEST_METHOD'] == "POST") {
