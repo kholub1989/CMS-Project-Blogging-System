@@ -1,9 +1,13 @@
 <?php include "includes/db.php"; ?>
 <?php include "./admin/functions.php"?>
 <?php include "includes/header.php"; ?>
-<?php require 'vendor/autoload.php'; ?>
+<?php require "vendor/autoload.php"; ?>
 
 <?php 
+$pusher = new Pusher\Pusher('740e828794a3c0164895', '70a16b02c7bb24a05844', '928633', 'us2');
+
+
+
 if($_SERVER['REQUEST_METHOD'] == "POST") {
   $username = trim($_POST['username']);
   $email    = trim($_POST['email']);
@@ -41,6 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
   }
   if (empty($error)) {  
     register_user($username, $email, $password);
+    $pusher->trigger('notifications', 'new_user', $username);
     login_user($username, $password);
   }
   
