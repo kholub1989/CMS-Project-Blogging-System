@@ -42,21 +42,27 @@
     $post_image = $row['post_image'];
     $post_content = $row['post_content'];
 ?>
-
       <h1 class="page-header">Posts</h1>
       <!-- First Blog Post -->
       <h2>
         <a href="#"><?php echo $post_title ?></a>
       </h2>
       <p class="lead">
-        by <a href="index.php"><?php echo $post_author ?></a>
+        by <a href="author_posts.php?author=<?php echo $post_author ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author ?></a>
       </p>
       <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
       <hr>
-      <img class="img-responsive" src="images/<?php echo imagePlaceholder($post_image); ?>" alt="">
+      <img class="img-responsive" src="images/<?php echo imagePlaceholder($post_image); ?>" alt="image">
       <hr>
       <p><?php echo $post_content ?></p>
       <hr>
+      <div class="row">
+        <p><a href="" class="pull-right"><span class="glyphicon glyphicon-thumbs-up"></span>  Like</a></p>
+      </div>
+      <div class="row">
+        <p class="pull-right">Like: 10</p>
+      </div>
+      <div class="clearfix"></div>
 
 <?php } ?>
 
@@ -154,3 +160,7 @@ if(isset($_POST['create_comment'])) {
 
   <!-- Footer -->
   <?php include "includes/footer.php" ?>
+
+  <script>
+    
+  </script>
