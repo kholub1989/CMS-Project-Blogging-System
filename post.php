@@ -57,7 +57,7 @@
       <p><?php echo $post_content ?></p>
       <hr>
       <div class="row">
-        <p><a href="" class="pull-right"><span class="glyphicon glyphicon-thumbs-up"></span>  Like</a></p>
+        <p class="pull-right"><a class="like" href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a></p>
       </div>
       <div class="row">
         <p class="pull-right">Like: 10</p>
@@ -162,5 +162,10 @@ if(isset($_POST['create_comment'])) {
   <?php include "includes/footer.php" ?>
 
   <script>
+    $(document).ready(function(){
+      $('.like').click(function(){
+        console.log('It WORKS');
+      });
+    });
     
   </script>
