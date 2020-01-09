@@ -7,6 +7,7 @@
 <?php 
  if (isset($_POST['liked'])) {
    $post_id = $_POST['post_id'];
+   $user_id = $_POST['user_id'];
    // Select POST 
    $query = "SELECT * FROM posts WHERE post_id=$post_id";
    $postResult = mysqli_query($connection, $query);
@@ -15,6 +16,8 @@
    // Update POST with Likes
    mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id=$post_id");
    // Create Likes for POST
+   mysqli_query($connection, "INSERT INTO likes(user_id, post_id)VALUES($user_id, $post_id)");
+   exit();
  }
 ?>
 
