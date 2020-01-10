@@ -50,10 +50,17 @@ function loggedInUserId() {
   return false;
 }
 
-function userLikedThisPost($post_id = '') {
+function userLikedThisPost($post_id) {
   $result = query("SELECT * FROM likes WHERE user_id=" . loggedInUserId() . " AND post_id={$post_id}");
   confirmQuery($result);
   return mysqli_num_rows($result) >= 1 ? true : false;
+}
+
+function getPostLikes($post_id) {
+  $result = query("SELECT * FROM likes WHERE post_id=$post_id");
+  confirmQuery($result);
+  echo mysqli_num_rows($result);
+  
 }
 
 function checkIfUserisLogegdInAndRedirect($redirectLocation=null) {

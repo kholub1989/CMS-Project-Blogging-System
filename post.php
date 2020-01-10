@@ -95,9 +95,8 @@
           </a>
         </p>
       </div>
-
       <div class="row">
-        <p class="pull-right">Like: 10</p>
+        <p class="pull-right">Like: <?php getPostLikes($the_post_id); ?></p>
       </div>
       <div class="clearfix"></div>
 
