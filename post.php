@@ -89,11 +89,11 @@
       <p><?php echo $post_content ?></p>
       <hr>
       <div class="row">
-        <p class="pull-right"><a class="like" href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a></p>
-      </div>
-
-      <div class="row">
-        <p class="pull-right"><a class="unlike" href="#"><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a></p>
+        <p class="pull-right">
+          <a href="" class="<?php echo userLikedThisPost($the_post_id) ? 'unlike' : 'like'; ?>">
+          <span class="glyphicon glyphicon-thumbs-up"></span><?php echo userLikedThisPost($the_post_id) ? ' Unlike' : ' Like'; ?>
+          </a>
+        </p>
       </div>
 
       <div class="row">
