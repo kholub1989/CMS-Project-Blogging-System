@@ -1,9 +1,47 @@
 <?php 
 
+// DB helper functions
+function redirect($location){
+  header("Location:" . $location);
+  exit;
+}
+
 function query($query) {
   global $connection;
-  return mysqli_query($connection, $query);
+  $result = mysqli_query($connection, $query);
+  confirmQuery($result);
+  return $result;
 }
+
+function fetchRecords($result) {
+  return mysqli_fetch_array($result);
+}
+
+// END db helper functions
+
+// General helpers
+function get_user_name() {
+  return isset($_SESSION['username']) ? $_SESSION['username'] : null;
+}
+
+// END General helpers
+
+
+// Authentication helper functions
+function is_admin() {
+  if (isLoggedIn()) {
+    $result = query("SELECT user_role FROM users WHERE user_id= " . $_SESSION['user_id'] . "");
+    $row = fetchRecords($result); 
+    if($row['user_role'] == 'admin') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  return false;
+}
+
+// END authentication helper functions
 
 function imagePlaceholder($image='') {
   if (!$image) {
@@ -20,10 +58,6 @@ function currentUser() {
   return false;
 }
 
-function redirect($location){
-  header("Location:" . $location);
-  exit;
-}
 
 function ifItIsMethod($method=null) {
   if ($_SERVER['REQUEST_METHOD'] == strtoupper($method)) {
@@ -181,21 +215,6 @@ function checkUserRole($table, $column, $role) {
   return mysqli_num_rows($select_all_subscribers);
 }
 
-function is_admin($username) {
-  global $connection;
-  $query = "SELECT user_role FROM users WHERE username = '$username' ";
-  $result = mysqli_query($connection, $query);
-  confirmQuery($result);
-
-  $row = mysqli_fetch_array($result); 
-
-  if($row['user_role'] == 'admin') {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 function username_exists($username) {
   global $connection;
   $query = "SELECT username FROM users WHERE username = '$username' ";
@@ -260,6 +279,7 @@ function login_user($username, $password) {
     $db_user_role       = $row['user_role'];
     
     if (password_verify($password, $db_user_password)) {
+      $_SESSION['user_id']    = $db_user_id;
       $_SESSION['username']   = $db_username;
       $_SESSION['firstname']  = $db_user_firstname;
       $_SESSION['lastname']   = $db_user_lastname;
