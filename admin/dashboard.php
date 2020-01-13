@@ -128,30 +128,24 @@
 <script type="text/javascript">
   google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawChart);
-
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
     ['Data', 'Count'],
 <?php 
   $elements_text = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
   $elements_count = [$post_counts, $post_published_counts, $post_draft_counts, $comment_counts, $unapproved_comments_count, $user_counts, $subscribers_counts, $categorie_counts];
-
   for ($i=0; $i < count($elements_text); $i++) { 
     echo "['{$elements_text[$i]}'" . "," . "{$elements_count[$i]}],";
   }
 ?>
-
   ]);
-
   var options = {
     chart: {
     title: '',
     subtitle: '',
     }
   };
-
   var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
   chart.draw(data, google.charts.Bar.convertOptions(options));
   }
 </script>
