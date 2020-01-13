@@ -1,5 +1,10 @@
 <?php include "includes/admin_header.php" ?>
 
+<?php 
+$post_count = count_records(get_all_user_posts());
+$comment_counts = count_records(get_all_posts_user_comments());
+?>
+
 <div id="wrapper">
 
   <!-- Navigation -->
@@ -30,7 +35,7 @@
                   <i class="fa fa-file-text fa-5x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-<div class='huge'><?php echo $post_counts = recordCount('posts'); ?></div>
+<?php echo  "<div class='huge'>".$post_count."</div>" ?>
                   <div>Posts</div>
                 </div>
               </div>
@@ -52,7 +57,7 @@
                   <i class="fa fa-comments fa-5x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-<div class='huge'><?php echo $comment_counts = recordCount('comments'); ?></div>
+<?php echo  "<div class='huge'>".$comment_counts."</div>" ?>
                   <div>Comments</div>
                 </div>
               </div>

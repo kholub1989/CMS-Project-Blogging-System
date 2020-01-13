@@ -17,7 +17,12 @@ function fetchRecords($result) {
   return mysqli_fetch_array($result);
 }
 
+function count_records($result){
+  return mysqli_num_rows($result);
+}
+
 // END db helper functions
+
 
 // General helpers
 function get_user_name() {
@@ -42,6 +47,34 @@ function is_admin() {
 }
 
 // END authentication helper functions
+
+// User specific helpers
+
+function get_all_user_posts() {
+  return query("SELECT * FROM posts WHERE post_user_id=" . loggedInUserId() ."");
+}
+
+// function get_all_posts_user_comments() {
+//   return query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id WHERE post_user_id=".loggedInUserId()."");
+// }
+
+
+function get_all_posts_user_comments(){
+  return query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id WHERE post_user_id=".loggedInUserId()."");
+
+}
+
+
+// END user specific helpers
+
+function recordCount($table) {
+  global $connection;
+  $query = "SELECT * FROM " . $table;
+  $select_all_post = mysqli_query($connection, $query);
+  $result = mysqli_num_rows($select_all_post);
+  confirmQuery($result);
+  return $result;
+}
 
 function imagePlaceholder($image='') {
   if (!$image) {
@@ -191,15 +224,6 @@ function delete_categories() {
   }
 }
 
-function recordCount($table) {
-  global $connection;
-  $query = "SELECT * FROM " . $table;
-  $select_all_post = mysqli_query($connection, $query);
-  $result = mysqli_num_rows($select_all_post);
-  confirmQuery($result);
-
-  return $result;
-}
 
 function checkStatus($tabel, $column, $status) {
   global $connection;
