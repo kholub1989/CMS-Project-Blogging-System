@@ -4,6 +4,8 @@
 $post_count = count_records(get_all_user_posts());
 $comment_counts = count_records(get_all_posts_user_comments());
 $categorie_counts = count_records(get_all_user_categories());
+$post_published_counts = count_records(get_all_user_publish_posts());
+$post_draft_counts = count_records(get_all_user_draft_posts());
 ?>
 
 <div id="wrapper">
@@ -98,10 +100,6 @@ $categorie_counts = count_records(get_all_user_categories());
       <!-- /.row -->
 
 <?php
-  $post_published_counts = checkStatus('posts', 'post_status', 'published');
-
-  $post_draft_counts = checkStatus('posts', 'post_status', 'draft');
-
   $unapproved_comments_count = checkStatus('comments', 'comment_status', 'unapproved');
 
   $subscribers_counts = checkUserRole('users', 'user_role', 'subscriber');

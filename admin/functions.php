@@ -62,6 +62,14 @@ function get_all_user_categories() {
   return query("SELECT * FROM categories WHERE user_id=" . loggedInUserId() ."");
 }
 
+function get_all_user_publish_posts() {
+  return query("SELECT * FROM posts WHERE post_user_id=" . loggedInUserId() ." AND post_status='published'");
+}
+
+function get_all_user_draft_posts() {
+  return query("SELECT * FROM posts WHERE post_user_id=" . loggedInUserId() ." AND post_status='draft'");
+}
+
 
 // END user specific helpers
 
