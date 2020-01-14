@@ -100,9 +100,8 @@ $post_draft_counts = count_records(get_all_user_draft_posts());
       <!-- /.row -->
 
 <?php
-  $unapproved_comments_count = checkStatus('comments', 'comment_status', 'unapproved');
-
-  $subscribers_counts = checkUserRole('users', 'user_role', 'subscriber');
+  $approved_comment_count = count_records(get_all_user_approved_posts_comments());
+  $unapproved_comment_count = count_records(get_all_user_unapproved_posts_comments());
 ?>
 
 <div class="row">
@@ -114,8 +113,8 @@ $post_draft_counts = count_records(get_all_user_draft_posts());
     var data = google.visualization.arrayToDataTable([
       ['Data', 'Count'],
       <?php 
-  $elements_text = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Pending Comments', 'Categories'];
-  $elements_count = [$post_count, $post_published_counts, $post_draft_counts, $comment_counts, $unapproved_comments_count,$categorie_counts];
+  $elements_text = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Approved Comments', 'Pending Comments', 'Categories'];
+  $elements_count = [$post_count, $post_published_counts, $post_draft_counts, $comment_counts, $approved_comment_count, $unapproved_comment_count,$categorie_counts];
   for ($i=0; $i < count($elements_text); $i++) { 
     echo "['{$elements_text[$i]}'" . "," . "{$elements_count[$i]}],";
   }
